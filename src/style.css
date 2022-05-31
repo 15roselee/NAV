@@ -25,6 +25,7 @@ body{
 .searchForm{
     display: flex;
     justify-content: space-around;
+    margin-top: 15vh;
 
 }
 @media (min-width:500px){
@@ -58,6 +59,7 @@ body{
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 10vh;
 
 }
 

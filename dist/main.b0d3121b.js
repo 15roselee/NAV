@@ -118,34 +118,35 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"epB2":[function(require,module,exports) {
-var $siteList = $('.siteList');
-var $lastLi = $siteList.find('li.last');
-var w = localStorage.getItem('w');
-console.log('w');
+var $siteList = $(".siteList");
+var $lastLi = $siteList.find("li.last");
+var w = localStorage.getItem("w");
+var inputWd = $(".wd");
+console.log("w");
 console.log(w);
 var wObject = JSON.parse(w);
 var hashMap = wObject || [{
-  logo: 'A',
-  url: 'https://www.acfun.cn'
+  logo: "A",
+  url: "https://www.acfun.cn"
 }, {
-  logo: 'B',
-  url: 'https://bilibili.com'
+  logo: "B",
+  url: "https://bilibili.com"
 }];
 
 var simplifyUrl = function simplifyUrl(url) {
-  return url.replace('https://', '').replace('http://', '').replace('www.', '').replace(/\/.*/, ''); //正则表达式删除/后的内容
+  return url.replace("https://", "").replace("http://", "").replace("www.", "").replace(/\/.*/, ""); //正则表达式删除/后的内容
 };
 
 var render = function render() {
-  $siteList.find('li:not(.last)').remove();
+  $siteList.find("li:not(.last)").remove();
   hashMap.forEach(function (node, index) {
     // console.log(index);
     var $li = $("<li>\n        <div class=\"site\">\n            <div class=\"logo\">".concat(node.logo[0], "</div>\n            <div class=\"link\">").concat(simplifyUrl(node.url), "</div>\n            <div class=\"close\">\n            <svg class=\"icon\" >\n            <use xlink:href=\"#icon-close\"></use>\n        </svg></div>\n        </div>\n    </li>")).insertBefore($lastLi);
-    $li.on('click', function () {
+    $li.on("click", function () {
       window.open(node.url);
     }); //代替a标签实现跳转
 
-    $li.on('click', '.close', function (e) {
+    $li.on("click", ".close", function (e) {
       e.stopPropagation(); //阻止冒泡
 
       console.log(hashMap);
@@ -156,11 +157,11 @@ var render = function render() {
 };
 
 render();
-$('.addButton').on('click', function () {
-  var url = window.prompt('请问你要添加什么网址');
+$(".addButton").on("click", function () {
+  var url = window.prompt("请问你要添加什么网址");
 
-  if (url.indexOf('http') !== 0) {
-    url = 'https://' + url;
+  if (url.indexOf("http") !== 0) {
+    url = "https://" + url;
   }
 
   console.log(url);
@@ -173,20 +174,33 @@ $('.addButton').on('click', function () {
 
 window.onbeforeunload = function () {
   var string = JSON.stringify(hashMap);
-  localStorage.setItem('w', string);
+  localStorage.setItem("w", string);
 };
 
-$(document).on('keypress', function (e) {
+var isInput = false;
+$(document).on("keypress", function (e) {
+  if (isInput) return;
+  console.log(e);
+
+  if (e.target == $("wd")) {
+    e.stopPropagation();
+  }
+
   console.log(e.key); // const keyCode = e.keyCode  可简写成下面这样
 
   var key = e.key;
 
   for (var i = 0; i < hashMap.length; i++) {
     if (hashMap[i].logo.toLowerCase() === key) {
-      event.preventDefault();
       window.open(hashMap[i].url);
     }
   }
 });
+$('.search').on('focus', function () {
+  return isInput = true;
+});
+$('.search').on('blur', function () {
+  return isInput = false;
+});
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.f30c21b4.js.map
+//# sourceMappingURL=main.b0d3121b.js.map
