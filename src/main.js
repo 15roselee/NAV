@@ -78,6 +78,7 @@ $(document).on('keypress', (e) => {
     } = e
     for (let i = 0; i < hashMap.length; i++) {
         if (hashMap[i].logo.toLowerCase() === key) {
+            event.preventDefault() 
             window.open(hashMap[i].url)
         }
 
