@@ -23,6 +23,9 @@ const simplifyUrl = (url) => {
     .replace("www.", "")
     .replace(/\/.*/, ""); //正则表达式删除/后的内容
 };
+
+ 
+
 const render = () => {
   $siteList.find("li:not(.last)").remove();
   hashMap.forEach((node, index) => {
@@ -37,6 +40,8 @@ const render = () => {
         </svg></div>
         </div>
     </li>`).insertBefore($lastLi);
+    
+    
     $li.on("click", () => {
       window.open(node.url);
     }); //代替a标签实现跳转
@@ -50,6 +55,19 @@ const render = () => {
   });
 };
 render();
+
+// const color=()=>{
+   
+//         let r = parseInt(Math.random() * 256);
+//         let g = parseInt(Math.random() * 256);
+//         let b = parseInt(Math.random() * 256);
+//         console.log($(".addButton"))
+//         console.log("猪猪");
+//        console.log($siteList); 
+
+//         return ($('.addButton').background ="rgb(" + r + "," + g + "," + b + ")")   
+//     }
+//     color()
 
 $(".addButton").on("click", () => {
   let url = window.prompt("请问你要添加什么网址");
